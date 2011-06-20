@@ -1,0 +1,1 @@
+log client side errors on the server side and send a daily report

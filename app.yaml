@@ -1,0 +1,27 @@
+application: appId
+version: remotelogger
+runtime: python
+api_version: 1
+
+builtins:
+- datastore_admin: on
+- remote_api: on
+
+inbound_services:
+- mail
+
+handlers:
+- url: /_ah/mail/logs@test\.appspotmail\.com 
+  script: remotelogger/logs_email.py 
+  login: admin
+  
+- url: /_ereporter.*
+  script: remotelogger/report_generator.py
+  login: admin
+  
+- url: /crossdomain.xml
+  static_files: crossdomain.xml
+  upload: crossdomain.xml
+
+- url: /.*
+  script: loggerapp.py
